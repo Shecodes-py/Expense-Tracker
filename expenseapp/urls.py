@@ -1,12 +1,12 @@
 from django.urls import path, include
-from .views import ExpenseViewSet
-from rest_framework.routers import DefaultRouter
+from . import views
+#from rest_framework.routers import DefaultRouter
 
-router = DefaultRouter()
-router.register(r'expenses', ExpenseViewSet, basename='expense')
-# we are already dealing with the django framework, it has inbuilt API routes
-# This means your endpoints will start with /expenses/
+#router = DefaultRouter()   # For Viewsets
+#router.register(r'expenses', views.ExpenseListCreateView, basename='expense')
 
 urlpatterns = [
-    path('', include(router.urls) )
+    #path('', include(router.urls)),
+    path('expenses/', views.ExpenseListCreateView.as_view(), name='expense-list-create'), # For ApiViews
+    path('expenses/delete/', views.ExpenseListCreateView.as_view(), name='delete-expenses'),
 ]
